@@ -31,7 +31,10 @@ class TestCache {
         if (this.index > 0) {
             let prevIndex = this.cacheIndexes[key]
             // console.log('pppp', prevIndex)
-            if (prevIndex != undefined) this.sorted.splice(prevIndex, 1);
+            if (prevIndex != undefined) {
+                this.sorted.splice(prevIndex, 1);
+                this.index -= 1;
+            }
         }
         this.cacheIndexes[key] = this.index;
         this.sorted[this.index] = key;
@@ -49,9 +52,9 @@ tc.setValue('b', 2);
 tc.setValue('c', 3);
 tc.setValue('d', 4);
 tc.setValue('e', 5);
+console.log('sortedIndexes', tc.sorted)
 console.log('get i:', tc.getValue('i')); /// undefined
 console.log('get a:', tc.getValue('a'));
 tc.setValue('g', 6);
-console.log('final', tc.sorted)
-console.log(tc.getList());
-
+console.log('final sortedIndexes', tc.sorted)
+console.log('Cache list:',tc.getList());
